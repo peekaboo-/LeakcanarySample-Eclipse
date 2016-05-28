@@ -52,7 +52,7 @@ public final class AndroidHeapDumper implements HeapDumper {
       return NO_DUMP;
     }
 
-    FutureResult<Toast> waitingForToast = new FutureResult<>();
+    FutureResult<Toast> waitingForToast = new FutureResult();
     showToast(waitingForToast);
 
     if (!waitingForToast.wait(5, SECONDS)) {

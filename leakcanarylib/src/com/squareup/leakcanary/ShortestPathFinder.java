@@ -58,11 +58,11 @@ final class ShortestPathFinder {
 
   ShortestPathFinder(ExcludedRefs excludedRefs) {
     this.excludedRefs = excludedRefs;
-    toVisitQueue = new LinkedList<>();
-    toVisitIfNoPathQueue = new LinkedList<>();
-    toVisitSet = new LinkedHashSet<>();
-    toVisitIfNoPathSet = new LinkedHashSet<>();
-    visitedSet = new LinkedHashSet<>();
+    toVisitQueue = new LinkedList();
+    toVisitIfNoPathQueue = new LinkedList();
+    toVisitSet = new LinkedHashSet();
+    toVisitIfNoPathSet = new LinkedHashSet();
+    visitedSet = new LinkedHashSet();
   }
 
   static final class Result {
@@ -234,7 +234,7 @@ final class ShortestPathFinder {
           excludedRefs.fieldNameByClassName.get(superClassObj.getClassName());
       if (classIgnoredFields != null) {
         if (ignoredFields == null) {
-          ignoredFields = new LinkedHashMap<>();
+          ignoredFields = new LinkedHashMap();
         }
         ignoredFields.putAll(classIgnoredFields);
       }

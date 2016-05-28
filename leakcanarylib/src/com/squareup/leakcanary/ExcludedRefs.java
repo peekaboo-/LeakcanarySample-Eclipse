@@ -41,11 +41,11 @@ public final class ExcludedRefs implements Serializable {
       Map<String, Map<String, Boolean>> staticFieldNameByClassName,
       Map<String, Boolean> threadNames, Map<String, Boolean> classNames) {
     // Copy + unmodifiable.
-    this.fieldNameByClassName = unmodifiableMap(new LinkedHashMap<>(fieldNameByClassName));
+    this.fieldNameByClassName = unmodifiableMap(new LinkedHashMap(fieldNameByClassName));
     this.staticFieldNameByClassName =
-        unmodifiableMap(new LinkedHashMap<>(staticFieldNameByClassName));
-    this.threadNames = unmodifiableMap(new LinkedHashMap<>(threadNames));
-    this.classNames = unmodifiableMap(new LinkedHashMap<>(classNames));
+        unmodifiableMap(new LinkedHashMap(staticFieldNameByClassName));
+    this.threadNames = unmodifiableMap(new LinkedHashMap(threadNames));
+    this.classNames = unmodifiableMap(new LinkedHashMap(classNames));
   }
 
   @Override public String toString() {
@@ -76,11 +76,11 @@ public final class ExcludedRefs implements Serializable {
   }
 
   public static final class Builder {
-    private final Map<String, Map<String, Boolean>> fieldNameByClassName = new LinkedHashMap<>();
+    private final Map<String, Map<String, Boolean>> fieldNameByClassName = new LinkedHashMap();
     private final Map<String, Map<String, Boolean>> staticFieldNameByClassName =
-        new LinkedHashMap<>();
-    private final Map<String, Boolean> threadNames = new LinkedHashMap<>();
-    private final Map<String, Boolean> classNames = new LinkedHashMap<>();
+        new LinkedHashMap();
+    private final Map<String, Boolean> threadNames = new LinkedHashMap();
+    private final Map<String, Boolean> classNames = new LinkedHashMap();
 
     public Builder instanceField(String className, String fieldName) {
       return instanceField(className, fieldName, false);
@@ -91,7 +91,7 @@ public final class ExcludedRefs implements Serializable {
       checkNotNull(fieldName, "fieldName");
       Map<String, Boolean> excludedFields = fieldNameByClassName.get(className);
       if (excludedFields == null) {
-        excludedFields = new LinkedHashMap<>();
+        excludedFields = new LinkedHashMap();
         fieldNameByClassName.put(className, excludedFields);
       }
       excludedFields.put(fieldName, always);
@@ -107,7 +107,7 @@ public final class ExcludedRefs implements Serializable {
       checkNotNull(fieldName, "fieldName");
       Map<String, Boolean> excludedFields = staticFieldNameByClassName.get(className);
       if (excludedFields == null) {
-        excludedFields = new LinkedHashMap<>();
+        excludedFields = new LinkedHashMap();
         staticFieldNameByClassName.put(className, excludedFields);
       }
       excludedFields.put(fieldName, always);

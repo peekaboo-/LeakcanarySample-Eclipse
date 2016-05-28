@@ -377,7 +377,7 @@ public final class DisplayLeakActivity extends Activity {
 
   static class LoadLeaks implements Runnable {
 
-    static final List<LoadLeaks> inFlight = new ArrayList<>();
+    static final List<LoadLeaks> inFlight = new ArrayList();
 
     static final Executor backgroundExecutor = Executors.newSingleThreadExecutor();
 
@@ -405,7 +405,7 @@ public final class DisplayLeakActivity extends Activity {
     }
 
     @Override public void run() {
-      final List<Leak> leaks = new ArrayList<>();
+      final List<Leak> leaks = new ArrayList();
       File[] files = leakDirectory.listFiles(new FilenameFilter() {
         @Override public boolean accept(File dir, String filename) {
           return filename.endsWith(".hprof");
@@ -421,7 +421,7 @@ public final class DisplayLeakActivity extends Activity {
             HeapDump heapDump = (HeapDump) ois.readObject();
             AnalysisResult result = (AnalysisResult) ois.readObject();
             leaks.add(new Leak(heapDump, result));
-          } catch (IOException | ClassNotFoundException e) {
+          } catch (Exception e) {
             // Likely a change in the serializable result class.
             // Let's remove the files, we can't read them anymore.
             heapDumpFile.delete();

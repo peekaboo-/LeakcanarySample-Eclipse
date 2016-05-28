@@ -58,7 +58,7 @@ public final class LeakTraceElement implements Serializable {
     this.holder = holder;
     this.className = className;
     this.extra = extra;
-    this.fields = unmodifiableList(new ArrayList<>(fields));
+    this.fields = unmodifiableList(new ArrayList(fields));
   }
 
   @Override public String toString() {
